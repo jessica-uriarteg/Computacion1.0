@@ -1,0 +1,222 @@
+%%%%%%%% PAQUETES NECESARIOS
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[table,x11names,dvipsnames,table]{xcolor}
+\usepackage[scientific-notation=true]{siunitx} 
+\usepackage{graphicx} 
+\usepackage{natbib} 
+\usepackage{amsmath} 
+\usepackage[spanish,activeacute]{babel}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,enumerate}
+\usepackage{pdfpages}
+\marginsize{1in}{1in}{1in}{1in} 
+\usepackage{enumerate}
+\setlength\parindent{30pt}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos, color=orange!50]{todonotes}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{epigraph}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+%\setlength\parindent{0pt} 
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\newcolumntype{a}{>{\columncolor[gray]{0.9}}c}
+
+%%%%%%%% TITULO 
+\title{FC-Actividad1-Latex}
+
+
+
+
+
+
+
+\begin{document}
+
+%#################################################################
+
+\begin{center}
+
+
+\includegraphics[width=0.3\textwidth]{unison-logo.png}~\\[0.8cm]
+
+\textsc{\LARGE Universidad de Sonora}\\[0.1cm]
+\textsc{Divisi\'on de Ciencias Exactas y Naturales}\\[0.1cm]
+\textsc{Departamento de F\'isica \\[0.5cm] \textbf{F\'isica Computacional I}}\\%[0.5cm]
+
+%\rule{\linewidth}{0.5pt} \\[6pt] 
+%\Large La Atm\'osfera Terrestre \\
+%\rule{\linewidth}{2pt}  \\[10pt]
+
+%\normalsize{Jessica Isamar Uriarte Garc\'ia \\
+%\today}
+\end{center}
+\noindent
+Actividad 1 \dotfill \textbf{\underline{La Atm\'osfera Terrestre}}\\
+Alumna \dotfill Jessica Isamar Uriarte Garc\'ia \\
+Docente \dotfill Carlos Liz\'arraga Celaya \\
+Fecha \dotfill \today \\
+\rule{\linewidth}{0.5pt} \\[6pt] 
+\abstractname{\\ \emph{ \scriptsize{  \baselinestretch La atm\'osfera terrestre es un fluido fino y delicado que cubre nuestro planeta atra\'ido por la gravedad. Es lo que permite la vida en la corteza de la tierra y lo hermoso y boato del cielo. \'Este funciona como un f\'iltro que disminuye la intensidad de la radiaci\'on solar ultravioleta, regula la temperatura y a su vez nos nutre con mezclas de gases como vapor, ox\'igeno, nitr\'ogeno y argon. Tiene propiedades espec\'ificas tanto f\'isicas como \'opticas que controlan la absorci\'on y emisi\'on de radiaci\'on, cambia la densidad, presi\'on, temperatura e incluso afecta la velocidad del sonido. Es importante enfocarnos en nuestra atm\'osfera para llevar a cabo estudios meteorol\'ogicos y tomar medidas de prevenci\'on ante una situaci\'on de riesgo que pueda presentarse por la acci\'on de alg\'un elemento clim\'atico.  \\} }}
+\renewcommand{\baselinestretch}{0.6}
+\rule{\linewidth}{2pt}  
+\small\tableofcontents
+
+\newpage
+%#################################################################
+
+\section{Introducci\'on}
+\noindent 
+En el año 340 B.C, Aristoteles escribi\'o un libro sobre filosof\'ia natural que cubr\'ia todo lo que ca\'ia o se observaba en el cielo. Para \'el y sus estudiantes estos objetos eran llamados \textit{meteoros} (del griego ``alto en el cielo"), aun que no necesariamente se tratara de una estrella fugaz. Gracias a la visi\'on que tuvo Galileo para inventar el term\'ometro y Toricelli con su bar\'ometro de mercurio, los instrumentos b\'asicos que hacen posible la investigaci\'on meteorol\'ogica, pudimos llegar a demostrar que la presi\'on atmosf\'erica disminuye cuando aumenta la altura. A partir del siglo XIX se pudo entender la f\'isica detras del viento o de las tormentas. Las herramientas fueron evolucionando con el tiempo y utilizadas ingeniosamente en la Segunda Guerra Mundial como radares, ahora transformados en herramientas para medir presipitaci\'on. \\ \\
+
+
+
+%#################################################################
+
+\section{Composici\'on}
+\noindent 
+La atmosfera es un fluido de aire seco o humedo que est\'a compuesto principalmente de nitr\'ogeno, ox\'igeno, argon y $1\%$ de otros gases. El ox\'igeno es una sustancia muy reactiva, se encarga de los procesos de oxidaci\'on, combusti\'on y la respiraci\'on de los seres vivos. El nitr\'ogeno es una sustancia inerte y neutraliza los efectos del ox\'igeno. La consentraci\'on de vapor de agua puede variar dependiendo de la temperatura y esto determina el estado de las moleculas. El vapor tambi\'en funciona como efecto invernadero, ya que controla el balance del la energ\'ia calor\'ifica.
+
+\tiny{
+\begin{table}[!hbt]
+\begin{center}
+\begin{tabular}{l c r}
+\toprule
+Gas& &Volumen\% \\
+\midrule
+Nitr\'ogeno & N$_2$ & 78.084\\
+\addlinespace
+%\cmidrule{2-3}
+Ox\'igeno & O$_2$ & 20.946\\
+\addlinespace
+Argon & Ar & 0.9340\\
+\addlinespace
+Di\'oxido de carbono & CO$_2$ &0.04\\
+\addlinespace
+Neon & Ne & 0.001818\\
+\addlinespace
+Helio & He & 0.000524\\
+\addlinespace
+Metano & CH$_4$ & 0.0000179\\
+\bottomrule
+\end{tabular}
+\caption{\scriptsize{\emph{Componentes cerca de la superficie terrestre.}}}
+\end{center}
+\end{table}
+}
+\normalsize
+La cantidad de vapor de agua difiere en cada regi\'on pero puede variar de 0.001-7\%. La tierra es el \'unico planeta conocido donde su atm\'osfera maneja el agua en cualquiera de sus tres estados (l\'iquido, s\'olido, gas) y es fundamental para el mantenimiento y desarrollo de vida. Tambi\'en una pequeña cantidad de particulas de polvo que se desprende del suelo al eruptar un volcan, pasar un temblor, etc, se elevan y quedan en este fluido. 
+%#################################################################
+
+\section{Estratificaci\'on}
+\noindent 
+La estratificaci\'on sucede cuando la densidad var\'ia causando que el fluido se separe en diferentes capas. En la atm\'osfera conforme se va agarrando m\'as altura la presi\'on y la densidad del aire disminuyen pero la tasa de lapso de temperatura var\'ia, ocacionalmente ocurre una inversi\'on o incluso hay zonas isot\'ermicas, donde la temperatura se mantiene constante. La gravedad es responsable por la concentraci\'on de particulas de aire cerca de la superficie, por consiguiente es donde hay m\'as presi\'on y densidad de aire. 
+
+En general, la temperatura solo depende de la radiaci\'on solar, y aunque pareciera que hay m\'as concentraci\'on en la \'ultima capa de la atm\'osfera, los rayos ultravioleta son absorbidos por el suelo de d\'ia y emitidos habitualmente de noche. Cada capa tiene un rol importante que determina el incremento o descenso de la temperatura. 
+
+
+\subsection{Trop\'osfera}
+
+\marginpar{\includegraphics[width=0.1\textwidth]{capas.jpg}}
+\noindent
+
+El 80$\%$ de la masa en la atm\'osfera y la mayor\'ia de la humedad y el vapor de agua se encuentra en \'esta primera capa. Por su gran densidad de aire, aqu\'i podemos respirar sin dificultad, lo cual hace crucial para nuestras vidas asegurarnos que esté estable. Es donde suceden los fen\'omenos meteorol\'ogicos. El grosor de \'esta capa difiere en localizaci\'on de la tierra; en \'areas con temperaturas bajas el grosor de la trop\'osfera llega a aproximadamente 7 km de la superficie mientras que en \'areas con temperaturas altas tienden a alcanzar aprox. 17 km. 
+
+Es la capa m\'as delgada de las cuatro y la \'unica accesada por aeronaves impulsados por h\'elices. Aqu\'i la temperatura va descendiendo a raz\'on de aproximadamente 6.5$^{\circ}$C por km de altura. Hay una \emph{tropopausa} al final de \'esta capa donde hay zonas isot\'ermicas o sucede una inversi\'on en la temperatura al llegar a la \emph{estrat\'osfera}.
+
+\subsection{Estrat\'osfera}
+\noindent
+
+Aqu\'i se encuentra la mayor concentraci\'on de gases. La presi\'on ya no es igual que en la superficie y la temperatura sube, llegando a aproximadamente 0$^{\circ}$C antes de llegar a la \emph{estratopausa}. La capa de ozono absorbe radiaci\'on electromagn\'etica en la regi\'on ultravioleta (UV) emitidas por el Sol, ocacionando que la temperatura se eleve. Est\'a entre 12 y 50 km de altura. 
+
+\subsection{Mes\'osfera}
+\noindent
+
+La cantidad ($\%$) de nitr\'ogeno y ox\'igeno en la mes\'osfera es la misma que en la superficie pero ser\'ia dificil respirar aqu\'i. Es la capa m\'as fr\'ia (en promedio est\'a a -85$^{\circ}$C e igual de gruesa que la estrat\'osfera (se extiende aproximadamente unos 30-40 km). Aunque sea escasa la cantidad de masa de aire, es importante por la ionización y las reacciones químicas que ocurren en ella. Aqu\'i es donde logramos ver los meteoros desintegrarse al querer penetrar la \emph{termosfera} provocando destellos de luz o \emph{estrellas fugaces}.
+
+
+\subsection{Termosfera}
+
+\noindent
+
+En \'esta capa se concentra la mayor\'ia de la temperatura por ser la m\'as cerca al Sol. Los rayos UV, gamma y rayos X provenientes del Sol provocan la ionizaci\'on de \'atomos de sodio y mol\'eculas y elevan la temperatura de los gases. Aqu\'i podemos apreciar las auroras boreales o australes en el cielo nocturno. Tambi\'en es donde orbita la Estaci\'on Espacial Internacional, a 380 km de altura. Es la capa m\'as gruesa y se extiende entre 80-700 km. 
+
+Acabando \'esta capa est\'a el l\'imite superior de nuestra atm\'osfera, la \textbf{exosfera}, donde se combina con el viento solar. En la exosfera los atomos y las part\'iculas pueden viajar libremente y tan alejados entre si que rara vez colisionan, por lo tanto ya no se concidera un gas. 
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{sunset.JPG}
+\centering
+\caption{\emph{\scriptsize{Se pueden distinguir facilmente las capas de la atm\'osfera en el exterior al amanecer y atardecer.}}}
+\end{figure}
+%#################################################################
+
+\section{Propiedades f\'isicas}
+\noindent
+Aunque el nivel del mar no sea constante se toma como referencia para ubicar la altitud. La presi\'on atmosf\'erica al nivel del mar es aproximadamente 101,325 pascales pero puede variar en cada lugar y estado de tiempo. Toda la masa atmosf\'erica se encuentra debajo de la linea K\'arm\'an (100 km a nivel del mar, que representa el l\'imite entre nuestra atm\'osfera y la exosfera) pero la mayor\'ia de la masa atmosf\'erica se encuentra en la trop\'osfera. En promedio, la masa de la atm\'osfera es aproximadamente $5.1480\times10^{18}$ kg.
+
+Para conocer la densidad se utiliza una ley de los gases ideales, o ecuaci\'on del estado del aire. Como \'este se comporta como un gas ideal, la velocidad del sonido depende de la temperatura y lo refleja en los cambios altitudinales.
+%#################################################################
+
+\section{Convecci\'on}
+\noindent
+Existe movimiento en el aire (viento) que transporta calor a \'areas con diferentes temperaturas y evaporan el vapor de agua en el cielo. El aire que sube se expande y se hela y cuando vuelve a bajar, sube la temperatura de las moleculas de aire. Esta transferencia de calor natural se define con la Ley de enfriamiento de Newton y le da sentido  al ciclo hidrol\'ogico. Estos procesos obedecen las leyes f\'isicas de la Termodin\'amica y generan una serie de fen\'omenos fundamentales en el comportamiento de  los vientos, formaci\'on de nubes, lluvia, etc.
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{vientos.png}
+\centering
+\caption{\emph{\scriptsize{Mapa del estado de tiempo con direcciones de viento, frente fr\'ios y frente caliente.}}}
+\end{figure}
+%#################################################################
+
+\section{An\'alisis de m\'etodos de sondeos}
+\noindent
+
+Uno de los diagramas termodin\'amicos m\'as utilizados en la meteorolog\'ia es la tabla de datos (o sondeos) oblicuo-T Log-P, tomando la temperatura, humedad, viento, niveles y estabilidad como par\'ametros. \'Esta informaci\'on proviene de diversas fuentes, por ejemplo: radiosondas con paraca\'idas, globos piloto, aeronaves, modelos num\'ericos y sondas satelitales. Los datos se graf\'ican de manera electr\'onica. Se observa que la presi\'on disminuye en forma logar\'itmica a medida que aumenta la altura, lo cual se representa con lineas isob\'aricas, creando lineas isot\'ermicas inclinadas. Obteniendo \'estas gr\'aficas nos quedamos con un pron\'ostico del tiempo confiable.
+
+Liberar radiosondas es bastante caro y no todas las ciudades cuentan con el presupuesto necesario para realizar el estudio dos veces al d\'ia.
+%#################################################################
+
+\section{Conclusi\'on}
+\noindent
+Sabemos que la fuente principal de energ\'ia es el Sol. Los gases m\'as abundantes en la atm\'osfera es el nitr\'ogeno, ox\'igeno, argon y vapor de agua. El vapor de agua es un gas de efecto invernadero que tiene un rol importante hubicado en la trop\'osfera, sin \'el estuvieramos achicharrados y sin manera de respirar. La cantidad de nubes de agua evaporizada, moleculas de agua cristalizada y tambi\'en la ausencia de humedad determina el estado de tiempo. Es sumamente importante informarnos sobre la contaminaci\'on que realizamos y pensar en maneras de evitarlo.
+%#################################################################
+
+\pagebreak
+\section{Bibliograf\'ia}
+\noindent
+
+\begin{enumerate} [\hspace{16pt} 1.]
+		\item C. Donald Ahrens. (--). Essentials of Meteorology. --: Tercera Edici\'on.
+
+		\item CC BY 3.0, {\url https://en.wikipedia.org/w/index.php?curid=13589569}
+
+        \item Holly Zell. (2013). Earth's Atmospheric Layers. 2017, de NASA Sitio web: \url{https://www.nasa.gov/mission_pages/sunearth/science/atmosphere-layers2.html}
+
+        \item NC State University. (2013). Structure of the Atmosphere. August 13, 2013, de Climate Education for K-12 Sitio web: \url{http://climate.ncsu.edu/edu/k12/.AtmStructure}
+        
+        \item Wikipedia. (2017). Atmosphere of Earth. 2017, de Wikipedia.com Sitio web: \url {https://en.wikipedia.org/wiki/Atmosphere_of_Earth}
+\end{enumerate}
+%#################################################################
+
+\epigraph{Vivimos en el fondo de un océano del elemento aire, el cual, mediante una experiencia incuestionable, se demuestra que tiene peso.}{\textit{Torricelli}}
+%#################################################################
+\end{document}
