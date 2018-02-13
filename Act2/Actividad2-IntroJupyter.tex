@@ -1,0 +1,236 @@
+%%%%%%%% PAQUETES NECESARIOS
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[table,x11names,dvipsnames,table]{xcolor}
+\usepackage[scientific-notation=true]{siunitx} 
+\usepackage{graphicx} 
+\usepackage{natbib} 
+\usepackage{amsmath} 
+\usepackage[spanish,activeacute]{babel}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,enumerate}
+\usepackage{pdfpages}
+\marginsize{1in}{1in}{1in}{1in} 
+\usepackage{enumerate}
+\setlength\parindent{30pt}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos, color=orange!50]{todonotes}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{epigraph}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+%\setlength\parindent{0pt} 
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\newcolumntype{a}{>{\columncolor[gray]{0.9}}c}
+
+%%%%%%%% TITULO 
+\title{FC-Actividad2-IntroJupyter}
+
+
+
+
+
+
+
+\begin{document}
+
+%#################################################################
+
+\begin{center}
+
+
+\includegraphics[width=0.3\textwidth]{unison-logo.png}~\\[0.8cm]
+
+\textsc{\LARGE Universidad de Sonora}\\[0.1cm]
+\textsc{Divisi\'on de Ciencias Exactas y Naturales}\\[0.1cm]
+\textsc{Departamento de F\'isica \\[0.5cm] \textbf{F\'isica Computacional I}}\\%[0.5cm]
+
+\end{center}
+\noindent
+Actividad 2 \dotfill \textbf{\underline{Intro a Python, Pandas y Jupyter}}\\
+Estudiante \dotfill Jessica Isamar Uriarte Garc\'ia \\
+Docente \dotfill Carlos Liz\'arraga Celaya \\
+Fecha \dotfill 7 de febrero del 2018 \\
+\rule{\linewidth}{0.5pt} \\[6pt] 
+\abstractname{\\ \emph{ \scriptsize{  \baselinestretch En esta actividad iniciamos con el uso del lenguaje de programación Python apoyado con el entorno de programación Jupyter Notebook. Jupyter Notebook se ha convertido en el entorno de programación para trabajar en el análisis de datos tanto en Python como en R. Utilizamos los datos de las Estaciones Automatizadas del Servicio Meteorológico Nacional.\\} }}
+\renewcommand{\baselinestretch}{0.6}
+\rule{\linewidth}{2pt}  
+\small\tableofcontents
+
+\newpage
+%#################################################################
+
+\section{Introducci\'on}
+\noindent 
+Recordemos que en la trop\'osfera la presi\'on atmosferica disminuye con altura. Si pudieramos sostener un parcel de aire caliente a nuestra altura, entre m\'as altura agarramos la presi\'on entre el parcel y el aire alrededor difieren. Al quererse equilibrar, el parcel sube hasta llegar a un balance de temperaturas (la temperatura empieza a bajar). Para que la bola de aire baje, ocupar\'ia subir su temperatura. 
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{img1.png}
+\centering
+\caption{\emph{\scriptsize{Se pueden distinguir facilmente las capas de la atm\'osfera en el exterior al amanecer y atardecer.}}}
+\end{figure}
+
+El viento y las r\'afagas se encargan de esparcir las diferentes temperaturas.
+
+%#################################################################
+
+\section{Temperatura}
+\noindent
+La temperatura del aire es una medici\'on de la energ\'ia cin\'etica, o la velocidad promedio a la que viajan las mol\'eculas y \'atomos en el aire, y mientras mayor sea la temperatura mayor interacci\'on y velocidad de \'estas. En la atm\'osfera el calor puede ser transferido por conduci\'on, conveci\'on y radiaci\'on. La energ\'ia calorf\'ifica requerida para cambiar el estado del agua en la atm\'osfera es igual al calor latente. Aunque el aire no sea buen conductor t\'ermico, se forman parceles de aire termales que suben al quererse expandir en lo que bajan de temperatura. 
+\subsection{Temperatura y humedad relativa}
+
+La \emph{humedad relativa} mide la cantidad de agua en el aire en forma de vapor, comparándolo con la cantidad máxima de agua que puede ser mantenida a una temperatura dada. Mientras la temperatura sea suficientemente baja y la humedad alta, el porcentaje o tasa de precipitaci\'on es m\'as alta. Esto se debe a que el aire fresco congela el vapor de agua formando gotas. 
+%#################################################################
+
+\section{Radiaci\'on solar}
+\noindent
+
+El sol tiene un espectro electromagn\'etico amplio con rayos facilmente identificables, desde ondas amplias (como el infrarojo) y ondas chicas y dañinas (como el ultravioleta). Los gases de efecto invernadero absorben la radiaci\'on infraroja para llegar a un equilibrio. Permite que la radiaci\'on solar llegue a la superficie y absorbe una gran porci\'on de radiaci\'on rebotada del suelo, evitando que se escape y desperdicie. Con un term\'ometro higr\'ometro capturamos la irradiancia para est\'ar alertos a la señal de alguna ola de calor. 
+
+ 
+
+%#################################################################
+
+\section{An\'alisis b\'asico de la base de datos}
+\noindent 
+Para llegar a conocer el clima de un lugar se hacen estudios del estado de tiempo coleccionando capturas de datos con sondeos, term\'ometro higr\'ometro, etc y estudiando su comportamiento a lo largo del tiempo. En \'este estudio se tomaron datos del tiempo en San Luis R\'io Colorado, Sonora y as\'i poder tener las herramientas necesarias para un an\'alisis estad\'istico del tiempo atmosf\'erico.
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{latlong.png}
+\centering
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{dataframe.png}
+\centering
+\caption{\emph{\scriptsize{Estructura del dataframe.}}}
+\end{figure}
+
+Se requiere bajar una tabla de informaci\'on o una base de datos para trabajar con variables como la temperatura, precipitaci\'on, direcci\'on y velocidad de viento en el lenguaje de programaci\'on \textbf{\emph{Python}}. Python es ideal para \emph{machine learning} (aprendizaje autom\'atico) y an\'alisis y visualizaci\'on de datos complejos, conocido por producir c\'odigos legibles.  Si buscamos resumir la informaci\'on en la base de datos utilizamos la funci\'on \emph{describe} y nos imprime la siguiente tabla. 
+\begin{verbatim}
+df.describe()
+\end{verbatim}
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{stats.jpg}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+
+DIRS nos da la direcci\'on de vientos en grados, DIRR la direcci\'on de las r\'afagas. VELS y VELR nos dan la velocidad del viento y las r\'afagas. En la col\'umna TEMP se guarda la temperatura promedio en centigrados. En HR se guarda la humedad relativa, PB es presi\'on, PREC precipitaci\'on y RAD la radiaci\'on solar incidente. Los d\'ias 5 y 6 de febrero estuvieron alrededor de 19.8$^{o}$, con aire bastante seco por la falta de precipitaci\'on, y la cantidad de irradiancia solar lleg\'o a un m\'aximo bastante alto. Imprimimos la siguiente gr\'afica con matplotlib.
+
+\begin{verbatim}
+plt.figure();dataframe.COLUMNA.plot();
+plot.show()
+\end{verbatim}
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{rad.png}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+Agregu\'e una nueva variable que me guardara solo las columnas VELS y VELR (las velociades de vientos y r\'afagas) y mediante una gr\'afica lineal se modelaron las velocidades como funci\'on del tiempo. Se imprime la siguiente gr\'afica (figura 2). 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{vient_raf.png}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+
+Siguiendo esas mismas indicaci\'ones llegamos a observar que entre las 7PM a 10PM el 5 de febrero y de 8AM a 12 de medio d\'ia del 6 de febrero fueron las horas del d\'ia con m\'as viento en San Luis R\'io Colorado, Sonora. Para ver las fechas entre las horas 100 y 123 se us\'o  
+
+\begin{verbatim}
+df_vel.head.head(130)
+\end{verbatim}
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{dirv.png}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+Entre las 7PM y 10PM del 5 de febrero las direcciones del viento cambiaban repentinamente, indicando un flujo de alto de aire/viento con mol\'eculas de aire exitadas por lo que ind\'ica la gr\'afica de variaci\'on de temperatura, es cuando se llega a su temperatura m\'axima 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{tempt.png}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+
+La temperatura m\'inima lleg\'o a 11$^{o}$ y alcanz\'o un m\'axmo de casi 30$^{o}$, pero la temperatura promedio fue aproximadamente 19$^{o}$. 
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{hr.png}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+
+Hubo m\'as cantidad (\%) de \emph{humedad relativa} en aires fr\'ios, llegando a casi saturar con 65\% y bajando a 22\% cuando la temperatura sube. Aunque hubo mucha humedad en aire fresco no se dieron las condiciones para que lloviznara o llegue a un 'Punto de Roc\'io'. La cantidad (\%) de precipitaci\'on para los dos d\'ias fue cero. 
+%#################################################################
+
+\section{Conclusi\'on}
+\noindent
+Otro tipo de histograma \'util es la \emph{rosa de los vientos} que muestra el número de horas al año que el viento sopla en la dirección indicada. Se inicia con un scattering o nube de puntos que indica la velocidad de los vientos en x y y. Seg\'un los datos de meteoroblue,  el viento est\'a soplando desde el Suroeste (SO) para el Noreste (NE). Cabo de Hornos, el punto de la Tierra m\'as meridional de Am\'erica del Sur, tiene un fuerte viento caracter\'istico del Oeste, lo cual hace los cruces de Este a Oeste muy dif\'icil, especialmente para los barcos de vela.
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{rosa.png}
+\centering
+\caption{\emph{\scriptsize{Descripci\'on de datos estad\'isticos.}}}
+\end{figure}
+
+%#################################################################
+
+\pagebreak
+\section{Bibliograf\'ia}
+\noindent
+
+\begin{enumerate} [\hspace{16pt} 1.]
+		\item C. Donald Ahrens. (--). Essentials of Meteorology. --: Tercera Edici\'on.
+
+		\item AkzoNobel. (2018). Que es la humedad relativa. 2018, de YatchPaint Sitio web: \url{http://www.yachtpaint.com/esp/diy/ask-the-experts/qu%C3%A9-es-la-humedad-relativa.aspx}
+
+        \item David Robinson. (September 6, 2017). The Incredible Growth of Python. 2018, de StackOverflow Sitio web: \url{https://stackoverflow.blog/2017/09/06/incredible-growth-python/}
+
+        \item Autor: blascoyago@gmail.com. (11 Abril 2013). CALCULO INSTALACIÓN FOTOVOLTAICA AISLADA DE LA RED (OFF-GRID) PART 3 (CAMPO FOTOVOLTAICO: RADIACIÓN SOLAR. CALCULO HORAS SOL PICO ). 2018, de CalculationSolar Sitio web: \url{http://calculationsolar.com/blog/?cat=2}
+        
+        \item Kiko Correoso. (July 23 2013). Dibujando una rosa de frecuencias (reloaded). 2018, de Pybonacci Sitio web: \url{http://www.pybonacci.org/2014/07/31/dibujando-una-rosa-de-frecuencias-reloaded-3/}
+        \item Meteorblue. (2018). Clima San Luis Río Colorado. 2018, de Meteorblue Sitio web: \url{https://www.meteoblue.com/es/tiempo/pronostico/modelclimate/san-luis-r%C3%ADo-colorado_m%C3%A9xico_3985604}
+        \item \url{http://smn1.conagua.gob.mx/emas/}
+\end{enumerate}
+
+%#################################################################
+\section{Ap\'endice}
+\begin{itemize}
+\item ¿Cuál es tu primera impresión de Jupyter Notebook?
+
+Es un lenguaje bastante flexible.
+\item ¿Se te dificultó leer código en Python?
+
+No.
+\item ¿En base a tu experiencia de programación en Fortran, que te parece el entorno de trabajar en Python?
+
+M\'as sencillo.
+\item En general, ¿qué te pereció el entorno de trabajo en Python? 
+
+F\'acil de entender y usar.
+\item ¿Qué opinas de la actividad? ¿Estuvo compleja? ¿Mucho material nuevo? ¿Que le faltó o que le sobró? ¿Qué modificarías para mejorar? 
+
+Me gusta el material que estamos viendo y siento que no le falt\'o o sobr\'o a la actividad. Fu\'e entretenida.
+\item ¿Comentarios adicionales que desees compartir? 
+
+Me da curiosidad trabajar con datos de la costa de Sonora. 
+\end{itemize}
+%#################################################################
+\end{document}
