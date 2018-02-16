@@ -1,0 +1,276 @@
+%%%%%%%% PAQUETES NECESARIOS
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[table,x11names,dvipsnames,table]{xcolor}
+\usepackage[scientific-notation=true]{siunitx} 
+\usepackage{graphicx} 
+\usepackage{natbib} 
+\usepackage{amsmath} 
+\usepackage[spanish,activeacute]{babel}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,enumerate}
+\usepackage{pdfpages}
+\marginsize{1in}{1in}{1in}{1in} 
+\usepackage{enumerate}
+\setlength\parindent{30pt}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos, color=orange!50]{todonotes}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{epigraph}
+\usepackage{wrapfig}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+%\setlength\parindent{0pt} 
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\newcolumntype{a}{>{\columncolor[gray]{0.9}}c}
+
+%%%%%%%% TITULO 
+\title{FC-Actividad3-Sondeos}
+
+
+
+
+
+
+
+\begin{document}
+
+%#################################################################
+
+\begin{center}
+
+
+\includegraphics[width=0.3\textwidth]{unison-logo.png}~\\[0.8cm]
+
+\textsc{\LARGE Universidad de Sonora}\\[0.1cm]
+\textsc{Divisi\'on de Ciencias Exactas y Naturales}\\[0.1cm]
+\textsc{Departamento de F\'isica \\[0.5cm] \textbf{F\'isica Computacional I}}\\%[0.5cm]
+
+\end{center}
+\noindent
+Actividad 3 \dotfill \textbf{\underline{Sondeos metereol\'ogicos de la atm\'osfera}}\\
+Estudiante \dotfill Jessica Isamar Uriarte Garc\'ia \\
+Docente \dotfill Carlos Liz\'arraga Celaya \\
+Fecha \dotfill 14 de febrero del 2018 \\
+\rule{\linewidth}{0.5pt} \\[6pt] 
+\abstractname{\\ \emph{ \scriptsize{  \baselinestretch En esta actividad iniciamos con el uso del lenguaje de programación Python apoyado con el entorno de programación Jupyter Notebook. Jupyter Notebook se ha convertido en el entorno de programación para trabajar en el análisis de datos tanto en Python como en R. Utilizamos los datos de sondeo de la Universidad de Wyoming en EEUU.\\} }}
+\renewcommand{\baselinestretch}{0.6}
+\rule{\linewidth}{2pt}  
+\small\tableofcontents
+
+\newpage
+%#################################################################
+%\begin{figure}[H]
+%\includegraphics[width=0.9\textwidth]{img1.png}
+%\centering
+%\caption{\emph{\scriptsize{Se pueden distinguir facilmente las capas de la atm\'osfera en el exterior al amanecer y atardecer.}}}
+%\end{figure}
+%#################################################################
+
+\section{Introducci\'on}
+\noindent 
+El clima es la estad\'isitica del tiempo atmosf\'erico en el lapso de mas o menos 30 años. Mientras m\'as datos tengamos del ambiente en el que vivimos m\'as vamos a poder comprender sus tendencias, estabilidad y propiedades. Por fortuna contamos con las herramientas necesarias para marcar el valor de las variables significativas a diario y acumular suficiente informaci\'on del lugar observado. Acumulando suficientes datos a lo largo de las decadas tendremos suficiente informaci\'on para notar patrones y, si es posible, predecir el tiempo futuro. 
+%#################################################################
+
+\section{Fundamentos}
+
+\subsection*{Radiosondas}
+
+\noindent
+\begin{wrapfigure}{L}{0.3\textwidth}
+%\centering
+\includegraphics[width=0.25\textwidth]{ballon.jpg}
+\end{wrapfigure}
+
+La radiosonda es una caja pequeña que carga instrumentos para medir el estado de tiempo y un radio para transmitir la informaci\'on a la superficie. Los intstrumentos incluyen un termistor afuera de la caja para medir la temperatura del aire, una pl\'aca cubierta de carb\'on con corriente el\'ectrica para medir la humedad en el aire, un bar\'ometro y algunos miden la rapid\'ez del viento. \'Estas cajas son elevadas mediante un globo grande de h\'elio o hidr\'ogeno que eventualmente llega a reventar por la baja presi\'on a alturas grandes. 
+
+Como se exploran verticalmente las propiedades f\'isicas y el estado de la atm\'osfera durante el d\'ia, \'estas son usadas para validar y aportar mod\'elos de pron\'ostico num\'ericos del estado del tiempo. \'Estos datos tambi\'en pueden ser obtenidos mediante sat\'elites metereol\'ogicos. Con los datos, es posible dibujar diagramas Stüve, que son útiles para interpretar fenómenos tales como las inversiones térmicas. Las lineas en los ejes o diagonales representan datos ist\'ermicos, isob\'aricos e isoc\'oricos. Conforme una parcela de aire sufre un proceso, es posible graficar su historia en un diagrama termodinámico. Un proceso reversible aparecerá como una curva cerrada, mientras que un proceso irreversible, será una curva abierta. Los diagramas termodinámicos son útiles no solo para representar la variación vertical de los parámetros, sino también para representar algunas propiedades hidrostáticas y de estabilidad.
+
+En general, en los países más desarrollados, se hacen 4 observaciones al día (03, 09, 15 y 21 hora Z, referido al meridiano de Greenwich).
+%#################################################################
+
+\section{An\'alisis de datos}
+\noindent
+
+Tom\'e datos de sondeos atmosf\'ericos de la Universidad de Wyoming en la estaci\'on 72274 de la ciudad de Tucson, Arizona y trabaj\'e con datos de presi\'on, altura, temperatura, temperatura de roc\'io, humedad relativa y velocidad de viento. Los datos que me interesaron fueron del 22 de Junio y 22 de Diciembre del 2017, ya que uno es el d\'ia m\'as corto y el otro el d\'ia m\'as largo. Copi\'e y pegu\'e la tabla de datos en el editor de textos (emacs) para borrar las primeras cuatro lineas y eliminar datos incompletos que impidan darle sentido a la estrucutra de \emph{data frame}.
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{dfweb.png}
+\centering
+\caption{\emph{\scriptsize{\url{http://weather.uwyo.edu/upperair/sounding.html}}}}
+\end{figure}
+
+Imprimimos el siguiente \textsc{Input} para obtener una tabla ya comprensible y m\'as f\'acil de manejar. 
+
+\begin{verbatim}
+dfJ.head()
+\end{verbatim}
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{dfpython.png}
+\centering
+\end{figure}
+
+Para asegurarme que la limpia de datos en emacs fue exitosa utilizando la siguiente funci\'on \textsc{dataframe.dtypes} nos evitamos problemas futuros al correr la gr\'afica codificada. 
+\begin{verbatim}
+dfJ.dtypes
+\end{verbatim}
+
+\begin{figure}[H]
+\includegraphics[width=0.3\textwidth]{dtype.png}
+\centering
+\end{figure}
+
+Con el siguiente algor\'itmo creamos una gr\'afica titulada \textsc{presi\'on vs. altura} y etiqueto los ejes $x$ y $y$. Declaro la $x$ como \emph{presi\'on} y $y$ como la \emph{altura}.
+
+\begin{verbatim}
+plt.title('Presión vs. Altura 22 de Junio')
+plt.ylabel('Altura (m)')
+plt.xlabel('Presión (hPa)')
+plt.grid(True)
+
+x=dfJ["PRES"]
+y=dfJ["HGHT"]
+
+plt.plot(x,y)
+plt.show()
+\end{verbatim}
+%#################################################################
+
+\subsection{Resultados}
+\noindent 
+
+Grafiqu\'e algunas variables como la presi\'on y temperatura como funci\'on de la altura para los dos solsticios del año 2017. En varios resultados la diferencia entre las gr\'aficas parecen ser m\'inimas, las figuras o curvas que agarran las lineas son similares pero si nos fijamos los parametros cambian como en el caso de las temperaturas y temperaturas de roc\'io. 
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{PRESjun.png}
+    \caption{\small Solsticio del 22 junio del 2017.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{PRESdic.png}
+    \caption{\small Solsticio del 22 de diciembre del 2017}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{TEMPjun.png}
+    \caption{\small La temperatura m\'inima alrededor de los 16 km supera los 70$^{o}$ bajo cero y llega hasta 30$^{o}$ C en la superficie.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{TEMPdic.png}
+    \caption{\small La temperatura m\'inima a las 16 km es alrededor 10$^{o}$ m\'as que en junio y en la superficie la temperatura es alrededor de 27$^{o}$ menor que en junio. }
+  \end{minipage}
+\end{figure}
+
+En las siguientes dos gr\'aficas, la linea verde es la temperatura de roc\'io, la temperatura m\'as baja a la que llega a condensarse el vapor de agua contenido en el aire, y la linea az\'ul es la temperatura promedio en unidades de $^{O}$C.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{TRjun.png}
+    \caption{\small A 10 km de altura la temperatura de roc\'io ocila entre los -50 y -40$^{o}$C. Llega a su temperatura m\'inima alrededor de los 20 km e imediatamente vuelve a subir la temperatura hasta llegar a 30 km de altura.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{TRdic.png}
+    \caption{\small A 10 km de altura la temperatura ya est\'a por llegar a los -80$^{o}$, y entre los 15-30 km la temperatura se mantiene cerca de -90$^{o}$C.}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{HRjun.png}
+    \caption{\small Hay mucho vapor para la temperatura a la que se llega a sentir en la superficie, esto se debe a las altas temperaturas y alta precipitaci\'on. Junio es temporada de lluvias para \'este lado des\'ertico en el desierto de Arizona/Sonora.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{HRdic.png}
+    \caption{\small Sin tanto calor, hay menos humedad relativa, no supera el 50\% despu\'es de 10 km.}
+  \end{minipage}
+\end{figure}
+
+Aqu\'i la velocidad del viento fue anotada en \emph{nudos}, una milla n\'autica por hora, la unidad de longitud empleada en una navegaci\'on mar\'itima y a\'erea. 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{RAPjun.png}
+    \caption{\small La velocidad no pasa los 18 nudos en los primeros 10 kil\'ometros del suelo y es mayor hasta los 30 km de altura.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{RAPdic.png}
+    \caption{\small La velocidad es mayor antes de 10 km de altura y va bajando hasta los 30 nudos a los 30 km.}
+  \end{minipage}
+\end{figure}
+
+%#################################################################
+
+\section{Conclusi\'on}
+\noindent
+Los datos coinciden con la informaci\'on que ya sabemos del d\'ia m\'as corto y m\'as largo del año. En junio estamos en verano, las temperaturas en Tucson llegan entre 30 y 40$^{o}$, mientras que en diciembre no pasa de los 10$^{o}$. Las temperaturas extremas en el solsticio se deben tambi\'en al tipo de bioma (desierto) donde tiene reputaci\'on de poseer escasas precipitaciones. 
+
+%#################################################################
+
+\pagebreak
+\section{Bibliograf\'ia}
+\noindent
+
+\begin{enumerate} [\hspace{16pt} 1.]
+		\item C. Donald Ahrens. (--). Essentials of Meteorology. --: Tercera Edici\'on.
+
+		\item Wikipedia. (---). Solsticio. 2018, de Wikipedia Sitio web: \url{https://es.wikipedia.org/wiki/Solsticio}
+        \item Wikipedia. (---). Tr\'opico de Cancer. 2018, de Wikipedia Sitio web: \url{https://es.wikipedia.org/wiki/Tr%C3%B3pico_de_C%C3%A1ncer}
+        
+        \item Wikipedia. (---). Milla n\'autica. 2018, de Wikipedia Sitio web: \url{https://es.wikipedia.org/wiki/Milla_n%C3%A1utica}
+        
+        \item Schwartz, B.E., and M. Govett. (1992). "A hydrostatically consistent North American Radiosonde Data Base at the forecast Systems Laboratory, 1946-present." . ---, de NOAA Technical Memorandum ERL FSL-4. Sitio web: \url{http://www.meteogalicia.gal/datosred/infoweb/meteo/docs/observacion/radiosondaxe/radiosondaxe_es.pdf}
+        \item \url{http://weather.uwyo.edu/upperair/sounding.html}
+\end{enumerate}
+
+%#################################################################
+\section{Ap\'endice}
+\begin{itemize}
+\item ¿Cuál es tu opinión general de esta actividad?
+
+Fue sencilla despu\'es de 'maquillar' los datos en emacs. 
+\item ¿Qué fue lo que más te agradó? ¿Lo que menos te agradó?
+
+Es curioso comparar mediante gr\'aficas las condiciones f\'isicas en la atm\'osfera durante los solsticios. Para nosotros es obvio, pero que los datos correspondan es un alivio.
+\item ¿Que consideras que aprendiste en esta actividad? 
+
+En Python aprend\'i a definir mis variables para graficar (x,y). 
+\item ¿Qué le faltó? ¿O le sobró? 
+
+Fue bastante completa la actividad. Me qued\'e con ganas de juntar las temperaturas del solsticio de junio y diciembre en una sola gr\'afica pero despu\'es lo buscar\'e con m\'as tiempo.
+\item ¿Que mejoras sugieres a la actividad?
+
+Tal vez introducir otro tipo de gr\'afica, a\'un no me quito la espinita de querer hacer una rosa de los vientos para graficar la direcci\'on de vientos, aunque no creo que sea muy \'util para an\'alisis de datos. 
+\end{itemize}
+%#################################################################
+\end{document}
