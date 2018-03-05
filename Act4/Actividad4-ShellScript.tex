@@ -1,0 +1,226 @@
+%%%%%%%% PAQUETES NECESARIOS
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[table,x11names,dvipsnames,table]{xcolor}
+\usepackage[scientific-notation=true]{siunitx} 
+\usepackage{graphicx} 
+\usepackage{natbib} 
+\usepackage{amsmath} 
+\usepackage[spanish,activeacute]{babel}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,enumerate}
+\usepackage{pdfpages}
+\marginsize{1in}{1in}{1in}{1in} 
+\usepackage{enumerate}
+\setlength\parindent{30pt}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos, color=orange!50]{todonotes}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{epigraph}
+\usepackage{wrapfig}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+%\setlength\parindent{0pt} 
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\newcolumntype{a}{>{\columncolor[gray]{0.9}}c}
+
+%%%%%%%% TITULO 
+\title{FC-Actividad4-Shells}
+
+
+
+
+
+
+\begin{document}
+
+%#################################################################
+
+\begin{center}
+
+
+\includegraphics[width=0.3\textwidth]{unison-logo.png}~\\[0.8cm]
+
+\textsc{\LARGE Universidad de Sonora}\\[0.1cm]
+\textsc{Divisi\'on de Ciencias Exactas y Naturales}\\[0.1cm]
+\textsc{Departamento de F\'isica \\[0.5cm] \textbf{F\'isica Computacional I}}\\%[0.5cm]
+
+\end{center}
+\noindent
+Actividad 4 \dotfill \textbf{\underline{Intro a la programaci\'on de Shell scripts}}\\
+Estudiante \dotfill Jessica Isamar Uriarte Garc\'ia \\
+Docente \dotfill Carlos Liz\'arraga Celaya \\
+Fecha \dotfill \today \\
+\rule{\linewidth}{0.5pt} \\[6pt] 
+\abstractname{\\ \emph{ \scriptsize{  \baselinestretch Los sistemas operativos UNIX (como Linux y macOS), se apoyan con un int\'erprete de comandos llamado \textit{Shell}, que juega el papel de intermediario entre el usuario y el sistema operativo.Hay toda una familia de int\'erpretes de comandos para los sistemas operativos. Entre ellos est\'an:  C Shell (/bin/csh), Bourne Shell (/bin/sh), Korn Shell (/bin/ksh/), Bourne Again Shell (/bin/bash), y otros. En el caso de la mayor\'ia de las variantes de Linux y macOS, por default viene el int\'erprete /bin/bash. En esta actividad, exploraremos las distintas formas de interactuar y hacer programas (scripts) con el Bourne Shell (/bin/sh) y el Bourne Again Shell /bin/bash.\\} }}
+\renewcommand{\baselinestretch}{0.6}
+\rule{\linewidth}{2pt}  
+\small\tableofcontents
+
+\newpage
+%#################################################################
+%\begin{figure}[H]
+%\includegraphics[width=0.9\textwidth]{img1.png}
+%\centering
+%\caption{\emph{\scriptsize{...}}}
+%\end{figure}
+%#################################################################
+
+\section{Introducci\'on}
+\noindent 
+El c\'odigo de un Shell script es diseñada para correr en una terminal shell de Unix, que interpreta una linea de comandos. \'Este tipo de programa no es muy popular entre administradores de sistemas, sobre todo cuando es comparado con el tiempo de ejecuci\'on del programa imperativo C. Las operaciones del shell script var\'ian, unos manipulan o bajan archivos online, ejecutan programas, etc. 
+
+%#################################################################
+
+\section{\emph{Shell scripting}}
+\noindent
+El primer shell script que se explor\'o en esta actividad fue \texttt{script1.sh}
+
+\begin{verbatim}
+#!/bin/bash
+
+# Archivo "script1.sh"
+# Script para bajar automáticamente los datos de sondeos atmosféricos de la
+# Universidad de Wyoming (http://weather.uwyo.edu/upperair/sounding.html)
+# para un rango de tiempo. Sustituir el valor de la estación de interés:
+# Estacion de Tucson, Arizona.
+
+STATION=72274
+
+# Despues de editar este archivo, ejecuta el comando: chmod 755 script1.sh
+# Para ejecutar el script: ./script1.sh
+
+# Definimos el separador de valores de las variables, en este caso es ":" 
+IFS=":"
+
+# Por ejemplo nos interesan bajar los datos del año 2017
+LISTYs="2017"
+
+# Lista de meses por días
+LISTM31="01:03:05:07:08:10:12"
+LISTM30="04:06:09:11"
+LISTM28="02"
+
+for j in $LISTYs ; do
+
+# Meses 31 dias
+for i in $LISTM31 ; do
+	/usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=$j&MONTH=$i&FROM=0100&TO=3112&STNM=$STATION"
+# Reposa 5 segundos
+        /bin/sleep 5
+done
+# Meses 30 dias
+for i in $LISTM30 ; do
+	/usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=$j&MONTH=$i&FROM=0100&TO=3012&STNM=$STATION"
+# Reposa 5 segundos
+        /bin/sleep 5
+done
+# Feb. 28 dias
+for i in $LISTM28 ; do
+	/usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=$j&MONTH=$i&FROM=0100&TO=2812&STNM=$STATION"
+# Reposa 5 segundos
+        /bin/sleep 5
+done
+done
+\end{verbatim}
+
+La primera linea le pide a Unix que ejecute el archivo del shell Bourne. Los siguientes cinco renglones que empiezan con un \# son comentarios que pueden ser vistos en el editor de textos emacs pero no afectan la ejecuci\'on del programa. Crea la variable \texttt{STATION=72274}, la estaci\'on de Tucson, y los comentarios debajo de la estaci\'on nos recuerda ejecutar el comando \texttt{chmod 755 script1.sh} y despu\'es el script \texttt{.\textbackslash{script1.sh}}. Empieza a bajar los datos del año 2017 cada 12 horas y los ordena por mes, tomando en cuenta que Febrero solo tuvo 28 d\'ias. Wget permite la descarga de estos datos desde el servidor web (P\'agina de la Universidad de Wyoming). Los funci\'on de los c\'iclos \texttt{for} era guardar cierta cantidad de columnas en un renglon de la listas de muestras. Se crean 12 archivos, uno por cada mes donde est\'a la informaci\'on tomada dos veces al d\'ia. 
+%#################################################################
+
+\section{Comandos}
+\noindent
+
+\subsection*{chmod}
+Con \texttt{chmod 755} cambi\'e los permisos de acceso del directorio \texttt{script1.sh} para poderlo modificar. 
+\subsection*{less}
+Vemos la informaci\'on del archivo y nos permite explorarlo.
+\subsection*{cat}
+El comando \texttt{cat} nos muestra el contenido del archivo y lo utilizamos para con\textit{cat}enar los 12 archivos y guardarlos en un archivo txt.
+\subsection*{grep}
+\texttt{grep} ermite realizar filtraciones y en este ejemplo solo seleccionamos y guardamos los renglones importantes. Toda esta informaci\'on se guard\'o en un archivo separado por comas llamado df2017.csv.
+
+%#################################################################
+
+\section{Conclusi\'on}
+\noindent
+Se pidi\'o crear un script que automatizara la concatetanci\'on y filtraci\'on de los datos. La \'unica modificaci\'on es el nombre del csv para que no escribiera sobre el primer archivo csv creado. 
+\begin{verbatim}
+#!/bin/bash
+
+###########################################
+# --------------------------------------- #
+#           Intro a Shell scripting       #
+# --------------------------------------- #
+#
+# __________Jessica Isamar Uriarte Garcia #
+# _____________________21 de Febrero 2018 #
+###########################################
+
+# Archivo "filtro.sch"
+# Script para automatizar las acciones de los comandos cat, grep/egrep.
+# Guardar los resultados en un archivo df2017_2.csv
+
+# Estando ya en la carpeta donde se encuentran los sondeos:
+
+# Concatenamos la colección desondeos y lo almacenamos en un solo archivo sondeos.txt
+cat sounding* > sondeos.txt
+
+# Filtramos los renglones que nos interesa conservar del archivo sondeos.txt
+egrep -v 'PRES|hPa' sondeos.txt | egrep '72274|Showalter|LIFT|SWEAT|K|Totals|CAPE|CINS|LFCT|CAPV|Temp|Pres|thick|Precip'>df2017_2.csv
+\end{verbatim}
+%#################################################################
+
+\pagebreak
+\section{Bibliograf\'ia}
+\noindent
+
+\begin{enumerate} [\hspace{16pt} 1.]
+		\item 
+
+		\item
+\end{enumerate}
+
+%#################################################################
+\section{Ap\'endice}
+\begin{itemize}
+\item  ¿Qué fue lo que más te llamó la atención en esta actividad?
+
+Crear mi propio script. 
+
+\item ¿Qué consideras que aprendiste?
+
+Crear mi un script.
+
+\item ¿Cuáles fueron las cosas que más se te dificultaron?
+
+Me tard\'e en caer en cuenta que lo que escriba en el script lo lee y ejecuta la terminal Unix y no un lenguaje de programaci\'on. Me tard\'e en seguir la \'ultima instrucci\'on.
+
+\item ¿Cómo se podría mejorar en esta actividad?
+
+Me pareci\'o bien.
+
+\item ¿En general, cómo te sentiste al realizar en esta actividad?
+
+Siento que con un script puedo ahorrar tiempo y ayuda a realizar cierta orden de comandos que guarden, filtren o modifiquen lo que yo ocupe de una base de datos 'cruda'. 
+\end{itemize}
+%#################################################################
+\end{document}

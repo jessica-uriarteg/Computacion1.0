@@ -3,8 +3,8 @@
 # Archivo "script1.sh"
 # Script para bajar automáticamente los datos de sondeos atmosféricos de la
 # Universidad de Wyoming (http://weather.uwyo.edu/upperair/sounding.html)
-# para un rango de tiempo. Sustituir el valor de la estación de interés: 
-# Estacion de Tucson 
+# para un rango de tiempo. Sustituir el valor de la estación de interés:
+# Estacion de Tucson, Arizona.
 
 STATION=72274
 
