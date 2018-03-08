@@ -1,0 +1,152 @@
+%%%%%%%% PAQUETES NECESARIOS
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[table,x11names,dvipsnames,table]{xcolor}
+\usepackage[scientific-notation=true]{siunitx} 
+\usepackage{graphicx} 
+\usepackage{natbib} 
+\usepackage{amsmath} 
+\usepackage[spanish,activeacute]{babel}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,enumerate}
+\usepackage{pdfpages}
+\marginsize{1in}{1in}{1in}{1in} 
+\usepackage{enumerate}
+\setlength\parindent{30pt}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos, color=orange!50]{todonotes}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{epigraph}
+\usepackage{wrapfig}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+%\setlength\parindent{0pt} 
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\newcolumntype{a}{>{\columncolor[gray]{0.9}}c}
+
+%%%%%%%% TITULO 
+\title{FC-Actividad5-Emacs}
+
+
+
+
+
+
+\begin{document}
+
+%#################################################################
+
+\begin{center}
+
+
+\includegraphics[width=0.3\textwidth]{unison-logo.png}~\\[0.8cm]
+
+\textsc{\LARGE Universidad de Sonora}\\[0.1cm]
+\textsc{Divisi\'on de Ciencias Exactas y Naturales}\\[0.1cm]
+\textsc{Departamento de F\'isica \\[0.5cm] \textbf{F\'isica Computacional I}}\\%[0.5cm]
+
+\end{center}
+\noindent
+Actividad 5 \dotfill \textbf{\underline{Preparando datos con Emacs}}\\
+Estudiante \dotfill Jessica Isamar Uriarte Garc\'ia \\
+Docente \dotfill Carlos Liz\'arraga Celaya \\
+Fecha \dotfill \today \\
+\rule{\linewidth}{0.5pt} \\[6pt] 
+\abstractname{\\ \emph{ \scriptsize{  \baselinestretch En esta actividad haremos uso intensivo del Editor Emacs para preparar los datos de sondeos de la Atm\'osfera descargados en la actividad anterior,  para su an\'alisis posterior con Panda.\\} }}
+\renewcommand{\baselinestretch}{0.6}
+\rule{\linewidth}{2pt}  
+\small\tableofcontents
+
+\newpage
+%#################################################################
+%\begin{figure}[H]
+%\includegraphics[width=0.9\textwidth]{img1.png}
+%\centering
+%\caption{\emph{\scriptsize{...}}}
+%\end{figure}
+%#################################################################
+
+\section{Introducci\'on}
+\noindent 
+
+%#################################################################
+
+\section{Índice CAPE \emph{(Convective available potential energy)}}
+\noindent
+
+\subsection*{Diccionario de Spain Severe Weather sobre el Índice LI (Lifted Index):} 
+
+"Medida común de la inestabilidad atmosférica. Su valor se obtiene por el cálculo de la temperatura que el aire cerca del suelo tendría si fuera elevado a algún nivel más alto (alrededor de 18,000 pies, normalmente) y comparando esta temperatura con la actual a ese nivel. Valores negativos indican inestabilidad – cuanto más negativo, más inestable es el aire, y más fuertes podrían ser los chorros ascendentes con cualquier desarrollo de tormentas. No obstante no hay números mágico o valores LI umbral debajo de los cuales el tiempo severo se haga inminente."
+%#################################################################
+
+\section{Agua precipitable}
+\noindent
+
+
+
+%#################################################################
+
+\section{Conclusi\'on}
+\noindent
+
+%#################################################################
+
+\pagebreak
+\section{Bibliograf\'ia}
+\noindent
+
+\begin{enumerate} [\hspace{16pt} 1.]
+		\item Steve Parker (2017). Shell Script Tutorial (shellscript.sh)
+
+		\item Wikipedia. (2018). Shell Script. 2018, de Wikipedia Sitio web: \url{https://en.wikipedia.org/wiki/Shell_script}
+        
+        \item HowtoForge. (2018). 1 The GREP command- an overview. 2018, de LINUX Tutorials Sitio web: \url{https://www.howtoforge.com/tutorial/linux-grep-command/}
+        
+        \item Wikipedia. (2018). Cat (Unix). 2018, de Wikipedia Sitio web: \url{https://en.wikipedia.org/wiki/Cat_(Unix)}
+        
+        \item Wikipedia. (2018). less (Unix). 2018, de Wikipedia Sitio web: \url{https://en.wikipedia.org/wiki/Less_(Unix)}
+        
+        \item Wikipedia. (2018). chmod. 2018, de Wikipedia Sitio web: \url{https://es.wikipedia.org/wiki/Chmod}
+        
+\end{enumerate}
+
+%#################################################################
+\section{Ap\'endice}
+\begin{itemize}
+\item  ¿Cómo se te hizo esta actividad? ¿Compleja, Difícil, Sencilla?
+
+No estuvo dif\'icil pero tuve dudas y no las aclar\'e a tiempo.
+\item ¿Qué te llamó más la atención?
+
+Con las gr\'aficas terminadas podr\'e ver los meses donde m\'as tormentas hubo en Tucson.
+\item ¿Qué parte fue la que menos te interesó hacer?
+
+Supe borrar informaci\'on que no se ocupa en emacs con query-replace pero no supe como darle la forma de base de datos a lo que me sobr\'o.
+\item ¿Cómo mejorarías esta actividad? ¿Qué le faltó? ¿Qué sobró?
+
+La actividad estuvo bien, a mi me falt\'o tiempo para terminarlo.
+\item ¿Hasta este punto, que te parece el uso de Jupyter para programar en Python?  
+
+Me parece m\'as r\'apido y f\'acil de compilar que otras apps como Spyder o CodeBlocks. 
+\end{itemize}
+%#################################################################
+\end{document}
