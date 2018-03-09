@@ -1,0 +1,258 @@
+%%%%%%%% PAQUETES NECESARIOS
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[table,x11names,dvipsnames,table]{xcolor}
+\usepackage[scientific-notation=true]{siunitx} 
+\usepackage{graphicx} 
+\usepackage{natbib} 
+\usepackage{amsmath} 
+\usepackage[spanish,activeacute]{babel}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,enumerate}
+\usepackage{pdfpages}
+\marginsize{1in}{1in}{1in}{1in} 
+\usepackage{enumerate}
+\setlength\parindent{30pt}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos, color=orange!50]{todonotes}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{epsfig}
+\usepackage{soul}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{epigraph}
+\usepackage{wrapfig}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.4mm}}
+%\setlength\parindent{0pt} 
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\newcolumntype{a}{>{\columncolor[gray]{0.9}}c}
+
+%%%%%%%% TITULO 
+\title{FC-Eval1-Manglar}
+
+
+
+
+
+
+\begin{document}
+
+%#################################################################
+
+\begin{center}
+
+
+\includegraphics[width=0.3\textwidth]{unison-logo.png}~\\[0.8cm]
+
+\textsc{\LARGE Universidad de Sonora}\\[0.1cm]
+\textsc{Divisi\'on de Ciencias Exactas y Naturales}\\[0.1cm]
+\textsc{Departamento de F\'isica \\[0.5cm] \textbf{F\'isica Computacional I}}\\%[0.5cm]
+
+\end{center}
+\noindent
+\textbf{Evaluaci\'on 1} \dotfill \textbf{\underline{Manglar El Sargento}}\\
+Estudiante \dotfill Jessica Isamar Uriarte Garc\'ia \\
+Docente \dotfill Carlos Liz\'arraga Celaya \\
+Fecha \dotfill \today \\
+\rule{\linewidth}{0.5pt} \\[6pt] 
+\abstractname{\\ \emph{ \scriptsize{  \baselinestretch Se tiene una estaci\'on de monitoreo de variables atmosf\'ericas, CO2, radiaci\'on solar, nivel de agua y salinidad en el Manglar El Sargento, en una bah\'ia en la costa frente a la parte norte de la Isla Tibur\'on. Nos interesa explorar los datos de octubre y noviembre del 2017 de nivel de mar, salinidad y temperatura del agua. Se proporcionan los datos de cada 15 minutos en formato CSV.\\} }}
+\renewcommand{\baselinestretch}{0.6}
+\rule{\linewidth}{2pt}  
+\small\tableofcontents
+
+\newpage
+%#################################################################
+%\begin{figure}[H]
+%\includegraphics[width=0.9\textwidth]{img1.png}
+%\centering
+%\caption{\emph{\scriptsize{...}}}
+%\end{figure}
+%#################################################################
+
+\section{Introducci\'on}
+\noindent 
+Los espacios marinos más ricos en recursos son los cuales en donde la producción  biológica de materias  alimenticias para los peces es alta. Los manglares mantienen las pesquerías costeras, pero es m\'as importante estudiar los manglares para cuidar y mantener sus funciones hidrol\'ogicas (regulan el microclima, controlan las inundaciones, protegen la capa acuífera durante la estación seca, etc).
+%#################################################################
+
+\section{Manglar}
+\noindent
+Los bosques de manglar son importantes por sus ricos recursos y protecci\'on costera. Los ambientes de manglar se forman a trav\'es de la relaci\'on entre la biota, el relieve, el flujo de agua y la atmósfera. El flujo de agua es importante en estos ecosystemas, el bosque se inunda periódicamente con agua salobre, con salinidad que va desde la de agua de mar a la de agua dulce.
+
+Con el fin de tolerar todas las condiciones a las cuales se encuentran expuestas, las plantas han desarrollado ciertas estrategias de adaptación fisiológicas y anatómicas como una marcada tolerancia a las altas concentraciones de sal, adaptaciones para ocupar suelos inestables, adaptaciones para intercambiar gases en sustratos anaeróbicos y embriones capaces de flotar que se dispersan transportados por el agua.
+\subsection{El Sargento} 
+En El Sargento se encuentran tr\'es tipos de manglar: rojo, negro y blanco. Anteriormente se usaban las raíces del mangle rojo hervidas con agua salada y como tintes
+naturales para la decoración de las “coritas” (cestos). El manglar negro era utilizada por el grupo étnico de los Seris para la realización de pangas. En general la madera de mangle era utilizada como arpones para sacar jaiba en los esteros. Estas plantas se encuentran bajo la categoría de amenazadas en la Norma Oficial Mexicana \textsc{NOM-059-SEMARNAT-20102}.
+
+El agua es de mar, lo cual significa que la salinidad deber\'ia estar entre 30 a 35 gramos de sal por litro de agua. El tipo de marea es semidiurna con gran altura. Es un sitio importante como corredor biológico para especies de aves, ya que les proveen de sombra, alimento
+y refugio.
+%#################################################################
+
+\section{An\'alisis de datos}
+\noindent
+Empezamos con dos bases de datos, \textsc{sargento-salinidad-201117.csv} que contiene la temperatura, conductividad y salinidad y los datos de \textsc{sargento-201117.csv} que adicionalmente contiene datos del nivel del mar. Despu\'es de leer los \emph{dataframes} en Pandas, les dimos estructura de base de datos y verificamos que ning\'un dato fuera de tipo \emph{object}.
+
+\begin{verbatim}
+dfsal=pd.read_csv('sargento-salinidad-201117.csv', sep=',')
+
+dfsal.head()
+\end{verbatim}
+
+La fecha y hora eran tipo object, lo cual se cambi\'o a \emph{datetime[64]} en una nueva columna llamada Fecha, y tambi\'en se agreg\'o una columna nueva con el mes.
+
+\begin{verbatim}
+dfsal['Fecha'] = pd.to_datetime(dfsal['Date'], format='%m/%d/%Y %H:%M:%S')
+
+dfsal['month'] = dfsal['Fecha'].dt.month
+\end{verbatim}
+
+
+\begin{figure}[H]
+   \begin{minipage}{0.6\textwidth}
+     \centering
+     \includegraphics[width=1\linewidth]{dfsal.png}
+     \caption{Base de datos salinidad}
+   \end{minipage}\hfill
+   \begin {minipage}{0.6\textwidth}
+     \centering
+     \includegraphics[width=0.9\linewidth]{dflvl}
+     \caption{Base de datos nivel del mar}
+   \end{minipage}
+\end{figure}
+
+Con la ayuda de matplotlib graficamos la variaci\'on del nivel del mar de los dos meses. La marea estuvo m\'as alta durante el mes de noviembre, alcanzando un m\'aximo de casi 1.2 metros de altura. 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{lvl.png}
+\centering
+\end{figure}
+Los altibajos que agarran forma de zig zag se debe a que todos los d\'ias sube y baja la marea. Notamos que hubo mareas m\'as altas a principios de noviembre debido a la cercania y fases de luna (luna llena el d\'ia 3 y luna nueva el d\'ia 18). 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{sal.png}
+\centering
+\end{figure}
+El nivel de salinidad est\'a dentro de un rango de aproximadamente 36 y 39 partes por mil de agua. El agua estuvo m\'as salado de lo normal.
+
+Podemos notar el cambio de estado de tiempo con la siguiente gr\'afica, que nos muestra como var\'ia la temperatura en el tiempo.
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{temp.png}
+\centering
+\end{figure}
+La temperatura empieza a bajar a finales de octubre, principios de noviembre, donde se puede ver que a mitad del oto'no la temperatura se mantiene en 23.5 $^o$ por un tiempo prolongado. La temperatura vuelve a ser constante y se mantiene a 22.5 $^o$  unos d\'ias.
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{boxlvl.png}
+\centering
+\caption{\emph{Diagrama de cajas del nivel del mar}}
+\end{figure}
+Si comparamos el nivel del mar en el mes octubre y en el mes de noviembre, notaremos que el nivel promedio, m\'inimo y m\'aximo en noviembre fue m\'as alto. Cada linea horizontal representa un cuartil, donde la linea dentro de la caja representa la media.
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{boxsal.png}
+\centering
+\caption{\emph{Diagrama de cajas de salinidad}}
+\end{figure}
+En octubre la salinidad vari\'o m\'as pero en promedio el nivel de salinidad se mantuvo casi constante los dos meses. 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{boxtemp.png}
+\centering
+\caption{\emph{Diagrama de cajas de temperatura}}
+\end{figure}
+En este diagrama de cajas notamos un dato at\'ipico en octubre, donde la temperatura lleg\'o hasta 25.3 $^o$ aproximadamente. En el 2017 los frentes fr\'ios iniciaron un mes antes (normalmente empiezan en septiembre pero iniciaron en agosto). Hubo 5 frentes fr\'ios en octubre y 6 en noviembre. 
+
+
+\subsection*{La correlaci\'on de Pearson}
+En estadística, el coeficiente de correlación de Pearson es una medida de la relación lineal entre dos variables aleatorias cuantitativas. A diferencia de la covarianza, la correlación de Pearson es independiente de la escala de medida de las variables. Se le ajusta una recta que mejor describa el comportamiento de dichas variables. 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{pearlvlsal.png}
+\centering
+\caption{\emph{Correlaci\'on de Pearson: Salinidad y nivel del mar}}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{peartemplvl.png}
+\centering
+\caption{\emph{Correlaci\'on de Pearson: Temperatura y nivel del mar}}
+\end{figure}
+El nivel del mar disminuye cuando la temperatura aumenta.
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{pear_tempsal.png}
+\centering
+\caption{\emph{Correlaci\'on de Pearson: Temperatura y salinidad}}
+\end{figure}
+Es notorio que la salinidad va disminuyendo conforme va subiendo la temperatura. Esto no es normal ya que las altas temperaturas causan una evaporaci\'on intensa, incrementando la salinidad resultante de la concentración de sales. Al parecer se comporta como si hubiera agua dulce.
+
+\begin{figure}[H]
+   \begin{minipage}{0.6\textwidth}
+     \centering
+     \includegraphics[width=1\linewidth]{lvlsal.png}
+     \caption{Salinidad y nivel del mar}
+   \end{minipage}\hfill
+   \begin {minipage}{0.6\textwidth}
+     \centering
+     \includegraphics[width=1\linewidth]{lvlsal5}
+     \caption{Sal y nivel del mar los \'ultimos 5 d\'ias}
+   \end{minipage}
+\end{figure}
+No hubo una clara manifestaci\'on de dependencia de salinidad y nivel del mar.
+
+\begin{figure}[H]
+   \begin{minipage}{0.6\textwidth}
+     \centering
+     \includegraphics[width=1\linewidth]{templvl.png}
+     \caption{Temperatura y nivel del mar}
+   \end{minipage}\hfill
+   \begin {minipage}{0.6\textwidth}
+     \centering
+     \includegraphics[width=1\linewidth]{templvl5}
+     \caption{Temperatura y nivel del mar los \'ultimos 5 d\'ias}
+   \end{minipage}
+\end{figure}
+Tampoco es claro si el nivel del mar depende de la temperatura. 
+
+%#################################################################
+
+\section{Conclusi\'on}
+\noindent
+Los datos coinciden con la informaci\'on que sabemos sobre los meses octubre y noviembre del a'no pasado. El manglar El Sargento es m\'as salado que el agua del mar y la salinidad depende de la temperatura. 
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{salytemp.png}
+\centering
+\end{figure}
+%#################################################################
+
+\pagebreak
+\section{Bibliograf\'ia}
+\noindent
+
+\begin{enumerate} [\hspace{16pt} 1.]
+		\item Wiki. (2018). Rhizophora mangle. 2018, de Wikipedia Sitio web: /url{https://es.wikipedia.org/wiki/Rhizophora-mangle}
+
+		\item Lic Berny Mar\'in. (2018). importancia de los manglares. 2018, de Dpto. de Investigaci\'on Pesquera INCOPESCA Sitio web: \url{http://www.incopesca.go.cr/incopesca/investigacion/16.%20Charla_Importancia_de_manglares.pdf}
+        
+        \item Wiki. (2018). Agua salobre. 2018, de Wikipedia Sitio web: \url{https://es.wikipedia.org/wiki/Agua_salobre}
+        
+        \item CONABIO. (--). Sitios de manglar con relevancia biológica y con necesidades de rehabilitación ecológica. FICHA DE CARACTERIZACION, de CONABIO Sitio web: \url{http://www.conabio.gob.mx/conocimiento/manglares/doctos/caracterizacion/PN04_Estero_El_Sargento_Isla_Tiburon_caracterizacion.pdf}
+        
+        \item Vercalendario. (..). Calendario Lunar Mes Noviembre 2017 (México) Fuente: https://www.vercalendario.info/es/luna/mexico-mes-noviembre-2017.html Fuente: https://www.vercalendario.info/es/luna/mexico-mes-noviembre-2017.html. 2017, de VerCalendario.info Sitio web: \url{https://www.vercalendario.info/es/luna/mexico-mes-noviembre-2017.html}
+        
+        \item Comisión Nacional del Agua. (2017). Se prevén 43 frentes fríos de noviembre de 2017 a mayo de 2018. 03 de noviembre de 2017, de gob.mx Sitio web: \url{https://www.gob.mx/conagua/prensa/123320}
+        
+       \item ILCE. (--). XII. PROPIEDADES QUÍMICAS DEL AGUA DE MAR: SALINIDAD, CLORINIDAD Y pH. --, de Biblioteca Digital ILCE Sitio web: \url{http://bibliotecadigital.ilce.edu.mx/sites/ciencia/volumen1/ciencia2/12/htm/sec_17.html}
+        
+\end{enumerate}
+
+%#################################################################
+\end{document}
